@@ -3,7 +3,6 @@
 
 A Simple tic tac toe game
 """
-
 # Implement a version of tic tac toe
 
 # player X = 1.  Player O = 0
@@ -11,6 +10,7 @@ A Simple tic tac toe game
 # Note to TA: The "move" function for some reason does not recognize
 # the "player" variable outside itself, making it impossible to change player.
 # otherwise, fully functional.
+import sys
 
 player = 1
 game = 1
@@ -31,11 +31,11 @@ def wincheck ():
     for x in range (3):
         if board[x][0] == board [x][1]== board [x][2]:
             print "Victory!"
-            game = 0
+            sys.exit()
     for x in range (3):
         if board[0][x] == board [1][x]== board [2][x]:
             print "Victory!"
-            game = 0
+            sys.exit()
     
     if board[0][0] == board [1][1]== board [2][2]:
         print "Victory!"
@@ -44,7 +44,8 @@ def wincheck ():
         print "Victory!"
         game = 0
 player = 1
-def move(space, player):
+def move(space, ply):
+    global player
     for y in range(3):
         for x in range(3):
             if board[y][x] == space:

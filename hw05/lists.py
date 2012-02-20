@@ -32,7 +32,7 @@ print "3.", [len(c.strip()) for c in raw_input().split(",")]
 #     index
 #        ex:  [ [0,3], [1,6], [2,9]...]
 print "4.", list(enumerate([x for x in range(100) if x%3==0]))
-
+# range(3,100,3)
 
 # 5. create a list of every card in a deck of cards
 

@@ -8,18 +8,20 @@ I used this:
 """
 from hwtools import input_nums
 
-nums = inputnums()
+nums = input_nums() #you forgot a _
 
 print "Before sort:"
 print nums
 
-N=len(nums)-1
-for x in range(N)
-    p=x
-    for i in range(x+1 N):
+Length =len(nums) #value N is now Length.  No need to subtract 1.
+for x in range(Length):
+    p=x #saves the original value at that address. P changes
+   
+    for i in range(x+1, Length): #i is the new value, p is saved value.
         if nums[i]<nums[p]:
-            pos=i
-   nums[x],nums[p]=nums[p],nums[x]
+            p=i
+            
+    nums[p],nums[x]=nums[x],nums[p] #this needs to stay inside the first For loop.
 
 print "After sort:"
 print nums

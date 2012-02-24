@@ -16,6 +16,12 @@ def draw_tie(surf, pos, color=(255,0,0), size=40):
     draw.rect(surf, color, (x, y+(size-width)/2, size, width))
     draw.circle(surf, color, (x+size/2, y+size/2), size/4)
 
+def move (x,y,dx,dy, bounds):
+    x+=dx
+    y+=dy
+    if x<bounds.left or x>bounds.right:
+        dx *=-1
+
 pygame.init()
 screen = pygame.display.set_mode((800,600))
 clock = pygame.time.Clock()

@@ -1,17 +1,23 @@
 #!/usr/bin/env python
 
+import string
 ###################### 
 #  Helper Functions
 ######################
 
 def splitparts(s):
-    "split_ints takes a string and returns all chunks.  Chunks are any space separated or comma separated values"
+    "splitparts takes a string and returns all chunks.  Chunks are any space separated or comma separated values"
+    return s.replace(",", " ").split()
     
 def a2idx(c):
     "converts a letter to it's index value"
+    
+    return string.ascii_uppercase.find(c.upper())
+    
+    
 
 def idx2a(i):
-    "converts an index to it's letter value"
+    return string.ascii_uppercase[i]
 
 ##############################################
 # Object Functions
@@ -25,8 +31,10 @@ def parse_stones(s):
     >>> parse_stones("12, 13")
     [12, 13]
     >>> parse_stones("0 200 4 5")
-    [99, 4 5]
+    [99, 4, 5]
     """
+    s = [int(p) for p in splitparts(s)]
+    return [min(v,99) for v in s if v > 0]
 
 # moves are [pile, amount] => [int, int]
 
@@ -38,6 +46,18 @@ def parse_move(s):
     >>> parse_move("this isn't valid")
     None
     """
+    s = splitparts(s)
+    if len(s) != 2:
+        return None
+    if s[0].isalpha():
+        s[0] = a2idx(s[0])
+    else:
+        return 0
+    if s[1].isdigit():
+        s[1]=int(s[1])
+    else:
+        return None
+    return s[0],s[1]
 
 def valid_move(mv, piles):
     """check if a given move can actually be completed
@@ -51,10 +71,18 @@ def valid_move(mv, piles):
     >>> valid_move([20,2], [3,3])
     False
     """
+    if mv == None:
+        return False
+    if mv[0] >= len(piles):
+        return False
+    if mv[1] > piles[mv[0]] or mv[1] < 1:
+        return False
+    return True
 
 
 def move(mv, piles):
     "perform a move"
+    piles[mv[0]] -= mv[1]
 
 #####################################
 #  Output Functions
@@ -62,9 +90,20 @@ def move(mv, piles):
 #####################################
 def header(piles):
     "draw the header of the game table"
+    piles = [idx2a(i) for i in range(len(piles))]
+    l = " "
+    l += "  ".join(piles)
+    l += " | Move"
+    return l
 
 def prompt(piles, player):
     "format the input prompt"
+    p = ""
+    p += " ".join("%2d" % i for i in piles)
+    p += " | "
+    p += "Player %d:  " %(player+1)
+    return p
+
 
 # do not touch, already done
 def separater(piles):

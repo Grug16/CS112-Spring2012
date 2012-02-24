@@ -11,7 +11,11 @@
 #   >>> greeter("WORLD")
 #   hello, world
 
-# def greeter(name):
+def greeter(name):
+    name = str(name)
+    name = name.lower()
+    print "hello,", name
+
 
 
 # Draw a box
@@ -30,7 +34,30 @@
 #    | |
 #    +-+
 
-# def box(w,h):
+def box(w,h):
+    if type(w) != int or type(h) != int:
+        print "Error: Invalid Dimensions"
+        return
+    if w <= 0 or h <= 0:
+        print "Error: Invalid Dimensions"
+        return
+    if w == 1:
+        top = "+"
+    else:
+        top = "+" + "-"*(w-2) + "+"
+    
+    if w == 1:
+        side = "|"
+    else:
+        side = "|" + " "*(w-2) + "|"
+    for x in range(h):
+        if x == 0:
+            print top
+        elif x == h-1:
+            print top
+        else:
+            print side
+
 
 
 
@@ -50,5 +77,41 @@
 #       | |
 #       | |
 
-# def tree()
+def tree(height=5, length=2, ornament = '-', leaf = '^', star='*'):
+    # height, trunk, star, leaf, ornament
 
+    if ornament is None:
+         ornament = ' '
+    if leaf is None:
+        leaf = ' '
+    if height <= 3:
+        trunk = "|"
+    else:
+        trunk = "| |"
+    
+    tr = []
+    if star is not None:
+        tr.append((height-1)*" "+star)
+    for layer in range(1, height+1):
+        tr.append(" "*(height - layer) + leaf + (ornament + leaf) * (layer - 1))
+    
+    if height <=3:
+        for x in range((length)):
+            tr.append((height-1)*" "+trunk)
+           
+
+    else:
+        for x in range(length):
+            tr.append((height-2)*" "+trunk)
+        
+    """
+    tr.append("    *")
+    tr.append("    ^")
+    tr.append("   ^-^")
+    tr.append("  ^-^-^")
+    tr.append(" ^-^-^-^")
+    tr.append("^-^-^-^-^")
+    tr.append("   | |")
+    tr.append("   | |")
+    """
+    return "\n".join(tr)

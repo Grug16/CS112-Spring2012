@@ -103,15 +103,5 @@ def tree(height=5, length=2, ornament = '-', leaf = '^', star='*'):
     else:
         for x in range(length):
             tr.append((height-2)*" "+trunk)
-        
-    """
-    tr.append("    *")
-    tr.append("    ^")
-    tr.append("   ^-^")
-    tr.append("  ^-^-^")
-    tr.append(" ^-^-^-^")
-    tr.append("^-^-^-^-^")
-    tr.append("   | |")
-    tr.append("   | |")
-    """
+     
     return "\n".join(tr)

@@ -13,6 +13,7 @@ from pygame.locals import *
 
 #colors
 
+
 def draw1(pos):
     x,y = pos
     draw.rect(screen, red, (x, y, 5, 5))
@@ -31,6 +32,10 @@ p2dx,p2dy = 0,0
 
 p1score = 0
 p2score = 0
+
+#def AI():
+#   if (p2pos[-1] in p1tail[:-1]) or (p2pos[-1] in p2tail[:-1]):
+#       True
 
 def move(x, y, dx, dy, edges):
     x+=dx
@@ -88,6 +93,7 @@ while not done:
             p1dx, p1dy = -2,0 #left
         
         #player 2
+        """
         elif event.type == KEYDOWN and event.key == K_UP and p2dy != 2:
             p2dx, p2dy = 0,-2
         elif event.type == KEYDOWN and event.key == K_RIGHT and p2dx != -2:
@@ -96,7 +102,7 @@ while not done:
             p2dx, p2dy = 0,2
         elif event.type == KEYDOWN and event.key == K_LEFT and p2dx != 2:
             p2dx, p2dy = -2,0
-       
+        """
         screen.fill(black)
         
         p1x, p1y, p1dx, p1dy = move(p1x, p1y, p1dx, p1dy, screen_edge)

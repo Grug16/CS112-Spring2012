@@ -9,9 +9,6 @@ import pygame
 from pygame import draw
 from pygame.locals import *
 
-# Require: Player 1 position and direction.  Player 2 position and direction.
-
-#colors
 
 def draw1(pos):
     x,y = pos

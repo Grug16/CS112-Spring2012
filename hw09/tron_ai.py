@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 """
 tron.py
+DAVID NISHBALL: Sorry.  Too spent to come up with anything brillaint in terms
+of AI.  It's the Predictive model I'm having issue with.  Is there a way to
+simulate keystrokes via code?  At least I got HW08.  Looking forward to
+discussing this in class.
 
 The simple game of tron with two players.  Press the space bar to start the game.  Player 1 (red) is controlled with WSAD and player 2 (blue) is controlled with the arrow keys.  Once the game is over, press space to reset and then again to restart.  Escape quits the program.
 """
@@ -8,10 +12,6 @@ The simple game of tron with two players.  Press the space bar to start the game
 import pygame
 from pygame import draw
 from pygame.locals import *
-
-# Require: Player 1 position and direction.  Player 2 position and direction.
-
-#colors
 
 
 def draw1(pos):

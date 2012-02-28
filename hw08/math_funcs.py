@@ -29,4 +29,13 @@ def distance(a, b):
 #     >>> normalize([1,1,1,1])
 #     [0.25, 0.25, 0.25, 0.25]
 
-# def normalize(vec):
+def normalize(vector):
+    total = 0
+    for n,v in enumerate(vector):
+        total += vector[n]**2
+    distance = math.sqrt(total)
+    if not (distance == 0):
+        for n,v in enumerate(vec):
+            vector[n] = vector[n] / distance
+        
+    return vector

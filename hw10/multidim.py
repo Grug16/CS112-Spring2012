@@ -26,6 +26,12 @@ search, and manipulate a multidimensional array.
 #      
 def find_coins(room):
     "returns a list of every coin in the room"
+    coins = []
+    for y in range(len(room)):
+        for x in range(len(room[y])):
+            if room[y][x] == 1:
+                coins.append([x,y])
+    return coins
 
 
 # 2. distance_from_player
@@ -36,5 +42,11 @@ def find_coins(room):
 import math
 def distance_from_player(player_x, player_y, width, height):
     "calculates the distance of each square from the player"
+    room = []
+    for y in range(height):
+        room.append([])
+        for x in range(width):
+            room[y].append(math.sqrt((x - player_x)**2 + (y - player_y)**2))
+    return room
 
-
+# player X, player y, difference between X and Width, Y and height

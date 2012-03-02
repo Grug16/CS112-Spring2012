@@ -22,7 +22,7 @@ looks something like this:
 
 You can see the actual data as a table in users_data.txt
 """
-
+#  USERS['Lola']['follows']
 # 1. followers
 #      Find everyone who is following the given names.  Using the 
 #      above example:

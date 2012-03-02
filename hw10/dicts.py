@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 """
+THIS IS THE PRE-MIDNIGHT VERSION.  ADVANCED LATER TONIGHT
+
 dicts.py
 
 Dictionaries
@@ -37,14 +39,40 @@ def freq(data):
 #      >>> avg_score("missing movie")
 #      None
 
+"""
+if not title in movies:
+movies[title] = []
+if value = None
+    return
+movies[title].append(value)
+
+def avg score (title)
+total = 0
+for v in movies(title):
+total += v
+return total / len(movie[title])
+
+
+"""
 movies = {}
 
 def score(title, value):
     "register the score for a given movie out of 5"
+    if not title in movies:
+        movies[title] = []
+    if value == None:
+        return
+    movies[title].append(value)
 
 
 def avg_score(title):
+    if title not in movies:
+        return None
     "return the average score for a given movie"
+    total = 0.0
+    for v in movies[title]:
+        total += v
+    return total / len(movies[title])
 
 
 
@@ -66,7 +94,31 @@ def avg_score(title):
 #           [ { "name": "Foo", "age": "24", "email": "foo@example.com" },
 #             { "name": "Bar", "age": "22", "email": "bar@example.com" },
 #             { "name": "Baz", "age": "20", "email": "baz@example.com" } ]            
+#
+# dict(zip(('one', 'two'), (1, 2)))
+# {"one": 1, "two": 2}
+"""
+>>> x = [1, 2, 3]
+>>> y = [4, 5, 6]
+>>> zipped = zip(x, y)
+>>> zipped
+[(1, 4), (2, 5), (3, 6)]
+"""
+
+
+# raw_input(msg).strip()
+ #   return [ int(c.strip()) for c in inp.split(",") ]
+ # splits everything at  the Comma, then strips the excess.
 
 def parse_csv(data):
     "parses a csv file into a list of dictionaries"
+    newlist = data.splitlines()
+    stripped_list = [line.strip() for line in newlist]
+    zip(newlist)
+    dict(newlist)
+
+    
+
+
+
 

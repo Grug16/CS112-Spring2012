@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-THIS IS THE PRE-MIDNIGHT VERSION.  ADVANCED LATER TONIGHT
+FINALLY FUCKING DID IT.  AND I COULDN'T BE MORE GLAD.  DEEDLY DEE, I DID IT!
 
 dicts.py
 
@@ -112,10 +112,15 @@ def avg_score(title):
 
 def parse_csv(data):
     "parses a csv file into a list of dictionaries"
-    newlist = data.splitlines()
-    stripped_list = [line.strip() for line in newlist]
-    zip(newlist)
-    dict(newlist)
+    newlist = data.strip().replace(' ','').split("\n") #removes spaces and splits on new lines
+    otherlist = [line.split(",") for line in newlist] #creates more lists
+    result = []
+    for x in range(len(otherlist)-1):
+        step = (dict(zip(otherlist[0], otherlist[x+1])))
+        print step
+        result.append(step)
+    return result
+        
 
     
 

@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 """
+>>> CALLING IT QUITS AT 4AM.  FOAF IS GIVING ME CONTRADICTORY ERRORS, IE "NOT A
+SET" WHEN IT IS CLEARLY A SET
+
+
 users.py 
 
 User Database (Advanced)
@@ -22,6 +26,8 @@ looks something like this:
 
 You can see the actual data as a table in users_data.txt
 """
+
+import sets
 #  USERS['Lola']['follows']
 # 1. followers
 #      Find everyone who is following the given names.  Using the 
@@ -33,6 +39,15 @@ You can see the actual data as a table in users_data.txt
 
 def followers(users, *names):
     "find followers for given names"
+    from sets import Set
+    data = Set([])
+    for target in names:
+        for name in users:
+            if target in users[name]['follows']:
+                data.add(name)
+    #    data.add(Set(users[x]['follows']))
+    print "Followers:  \n",data
+    return data
 
 
 # 2. underage_follows
@@ -41,8 +56,20 @@ def followers(users, *names):
 #      users themselves
 #          >>> underage_follows(users)
 #          [ "Steve M", "Gerald Q", "Frank L" ]
+
 def underage_follows(users):
     "find who underage users follow"
+    from sets import Set
+    data = Set([])
+    children = []
+    for x in users:
+        if users[x]['age'] <= 12:
+            children.append(x)
+            data = data | (Set(users[x]['follows']))
+    for name in children:
+        if data.__contains__(name):
+            data.remove(name)
+    return data
 
 
 
@@ -54,6 +81,32 @@ def underage_follows(users):
 
 def foaf(users, name):
     "find everyone whom a user's followers follow (not including user)"
+    from sets import Set
+    data = Set([])
+    usednames = []
+    for x in followers(users, name):
+        usednames.append(x)
+        data = data | (Set(users[x]['follows']))
+    for aname in usednames:
+        if data.__contains__(aname):
+            data.remove(aname)
+    data.remove(name)
+    print "foaf: \n",data
+    return data
+
+"""
+
+def followers(users, *names):
+    "find followers for given names"
+    from sets import Set
+    data = Set([])
+    for target in names:
+        for name in users:
+            if target in users[name]['follows']:
+                data.add(name)
+    #    data.add(Set(users[x]['follows']))
+    return data
+"""
 
 
 

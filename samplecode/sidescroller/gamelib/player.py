@@ -2,6 +2,8 @@
 player.py
 
 """
+import logging
+log = logging.getLogger(__name__)
 import pygame
 from pygame.locals import *
 from pygame import Surface
@@ -30,11 +32,14 @@ class Player(Sprite):
         self.vx = 0
         self.vy = 0
         self.inair = True
+        
+        log.info("player is created")
 
     def jump(self):
         if not self.inair:
             self.inair = True
             self.vy = PLAYER_JUMP_SPEED
+        log.info("player jumped")
     
     def touches(self, group):
         touching = Group()

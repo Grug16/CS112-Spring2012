@@ -26,22 +26,21 @@ class QuadTreeTest(unittest.TestCase):
     def test_get_points_one(self):
         "if only one point is added, a list containing that one point should be returned"
         self.qtree.add_point((25, 25))
-        self.assertItemsEqual(self.qtree.get_points(), [(25,25)], "One point has been added, only one point should be returned")
+        self.assertItemsEqual(self.qtree.get_points(), [(25,25)], ("One point has been added, only one point should be returned", self.qtree.get_points()))
 
     @unittest.skipIf(not hasattr(QuadTreeNode, "get_points"), "missing get_points")
     def test_get_points_many(self):
         "get_points should return all points added"
-
         self.qtree.add_point((25, 25))
         self.qtree.add_point((75, 75))
         self.qtree.add_point((22, 22))
-        self.assertItemsEqual(self.qtree.get_points(), [(22,22), (75,75), (25,25)], "Incorrect points returned")
+        self.assertItemsEqual(self.qtree.get_points(), [(22,22), (75,75), (25,25)], ("Incorrect points returnedF: ", self.qtree.get_points()))
 
     # get_rects tests
     @unittest.skipIf(not hasattr(QuadTreeNode, "get_rects"), "missing get_rects")
     def test_get_rects_simple(self):
         "if zero or one points have been added, get_rects should just return a list with the root's rect"
-        self.assertIn(self.qtree.rect, self.qtree.get_rects(), "root rect missing, no points")
+        self.assertIn(self.qtree.rect, self.qtree.get_rects(), ("root rect missing, no points", self.qtree.get_rects()))
         self.assertEqual(1, len(self.qtree.get_rects()), "too many rects returned, no points")
         
         self.qtree.add_point((30,30))
@@ -93,7 +92,7 @@ class QuadTreeTest(unittest.TestCase):
     @unittest.skipIf(not hasattr(QuadTreeNode, "collidepoint"), "missing collidepoints")
     def test_collidepoint_simple(self):
         "if there are zero or one points, collidepoint just needs to return the node"
-        self.assertEqual(self.qtree, self.qtree.collidepoint((50,50)), "no points, expected root node")
+        self.assertEqual(self.qtree, self.qtree.collidepoint((50,50)), ("no points, expected root node.  here is the result: ", self.qtree.collidepoint((50,50))))
         self.qtree.add_point((50,50))
         self.assertEqual(self.qtree, self.qtree.collidepoint((50,50)), "one points, expected root node")
 
@@ -117,10 +116,10 @@ class QuadTreeTest(unittest.TestCase):
         self.qtree.add_point((40,40))
 
         self.assertEqual(self.qtree.ne, self.qtree.collidepoint((75,25)), "expected ne")
-        self.assertEqual(self.qtree.sw, self.qtree.collidepoint((25,75)), "expected sw")
+        self.assertEqual(self.qtree.sw, self.qtree.collidepoint((25,75)), ("expected sw", self.qtree.collidepoint((25,75))))
         self.assertEqual(self.qtree.se, self.qtree.collidepoint((75,75)), "expected se")
 
-        self.assertEqual(self.qtree.nw.nw, self.qtree.collidepoint((10,10)), "expected nw.nw")
+        self.assertEqual(self.qtree.nw.nw, self.qtree.collidepoint((10,10)), ("expected nw.nw", self.qtree.collidepoint((10,10))))
         self.assertEqual(self.qtree.nw.ne, self.qtree.collidepoint((40,10)), "expected nw.ne")
         self.assertEqual(self.qtree.nw.sw, self.qtree.collidepoint((10,40)), "expected nw.sw")
         self.assertEqual(self.qtree.nw.se, self.qtree.collidepoint((40,40)), "expected nw.se")

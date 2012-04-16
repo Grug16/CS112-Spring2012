@@ -43,9 +43,10 @@ Example:
  >>> qtree.add_point((75, 75))
  >>> qtree.add_point((22, 22))
  [ (25,25), (75, 75), (22, 22) ]
+"""
 
 
-
+"""
 Getting Rects (quadrents)
 --------------------------------
 
@@ -100,7 +101,7 @@ from pygame import Rect
 
 MAX_DEPTH = 10
 class QuadTreeNode(object):
-
+    
     def __init__(self, rect, depth = 0):
         self.rect = rect
         self.data = None
@@ -150,13 +151,56 @@ class QuadTreeNode(object):
         else:
             self.se.add_point(point)
 
-    # def get_points(self):
-    
 
-    # def get_rects(node, rects=None):
-    #   if rects is None:
-    #       rects = []
+    def get_points(self):
+        if self.is_split is True:
+            list = []
+            list += self.nw.get_points()
+            list += self.ne.get_points()
+            list += self.sw.get_points()
+            list += self.se.get_points()
+            return list
+        elif self.data is not None:
+            return [self.data]
+        
+        else:
+            return []
+        
+            
+        
 
+    def get_rects(self, rects=[]):
+        rects = []
+        rects.append(pygame.Rect(self.rect))
+        if self.is_split is True:
+
+            rects += self.nw.get_rects()
+            rects += self.ne.get_rects()
+            rects += self.sw.get_rects()
+            rects += self.se.get_rects()
+        
+        return rects
+        
+        
+        #else:
+        #    return []
 
     # Advanced
-    # def collidepoint(self, point):
+    def collidepoint(self, point):
+        if not self.rect.collidepoint(point):
+            return None
+        
+        if self.is_split is False:
+            return self
+        else:
+            if point[0] > (self.rect.width / 2):
+                if point[1] > (self.rect.height / 2):
+                    return self.se.collidepoint(point)
+                else:
+                    return self.ne.collidepoint(point)
+            else:
+                if point[1] > (self.rect.height / 2):
+                    return self.sw.collidepoint(point)
+                else:
+                    return self.nw.collidepoint(point)
+        
